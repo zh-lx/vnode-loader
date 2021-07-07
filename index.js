@@ -6,7 +6,6 @@ let Map = {};
 const handleAst = (ast, str) => {
   if (ast && ast.type === 1) {
     if (ast.children && ast.children.length) {
-      console.log(33);
       for (let i = ast.children.length - 1; i >= 0; i--) {
         str = handleAst(ast.children[i], str);
       }
@@ -25,15 +24,20 @@ const handleAst = (ast, str) => {
 };
 module.exports = function (content, map) {
   // babel.transform(content);
-  if (Map[this.resourcePath]) {
-    return content;
+  console.log('------:', this.loaders);
+  const pathh = this.resourcePath;
+  if (Map[pathh]) {
+    // return Map[pathh];
   } else {
-    Map[this.resourcePath] = 1;
+    const ast = parse(content);
+    const aast = ast.descriptor.template.ast;
+    const source = aast.loc.source;
+    const res = handleAst(aast, source);
+    // console.log(res);
+    const tt = ast.descriptor.source.replace(source, res);
+    Map[pathh] = tt;
+    // return tt;
   }
-  const ast = parse(content);
-  const aast = ast.descriptor.template.ast;
-  const source = aast.loc.source;
-  const res = handleAst(aast, source);
-  console.log(res);
-  return content;
+  this.callback(null, Map[pathh]);
+  return;
 };
