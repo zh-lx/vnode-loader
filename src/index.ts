@@ -1,5 +1,6 @@
 import { parse } from '@vue/compiler-sfc';
 import { LoaderContext } from 'webpack';
+import { getInjectContent } from './inject-ast';
 
 let FileMap = {}; // 全局的FileMap，记录那些文件被处理过
 
@@ -18,7 +19,16 @@ function TrackCodeLoader(
     const vueParserContent = parse(content); // vue文件parse后的内容
     const domAst = vueParserContent.descriptor.template.ast; // template开始的dom ast结构
     const templateSource = domAst.loc.source; // template部分的原字符串
+    const newTemplateSource = getInjectContent(
+      domAst,
+      templateSource,
+      filePath
+    ); // 注入后的template部分字符串
+    const newContent = content.replace(templateSource, newTemplateSource);
+    FileMap[filePath] = newContent;
   }
+  this.callback(null, FileMap[filePath]);
+  return;
 }
 
 export = TrackCodeLoader;

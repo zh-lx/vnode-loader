@@ -1,7 +1,7 @@
 {
   "name": "track-code-loader",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "repository": "git@github.com:zh-lx/track-code-loader.git",
   "author": "zh-lx <18366276315@163.com>",
   "license": "MIT",
