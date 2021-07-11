@@ -1,8 +1,8 @@
 {
-  "name": "track-code-loader",
+  "name": "vnode-loader",
   "version": "1.0.0",
   "main": "./lib/index.js",
-  "repository": "git@github.com:zh-lx/track-code-loader.git",
+  "repository": "git@github.com:zh-lx/vnode-loader.git",
   "author": "zh-lx <18366276315@163.com>",
   "license": "MIT",
   "dependencies": {
