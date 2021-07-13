@@ -1,5 +1,10 @@
 import { ElementNode } from '@vue/compiler-core';
-import { InjectColumnName, InjectLineName, InjectPathName } from './constant';
+import {
+  InjectColumnName,
+  InjectLineName,
+  InjectPathName,
+  InjectNodeName,
+} from './constant';
 
 export function getInjectContent(
   ast: ElementNode,
@@ -21,9 +26,10 @@ export function getInjectContent(
     const column = ast.loc.start.column; // 当前节点起始列
     const columnToInject = column + ast.tag.length; // 要注入信息的列(标签名后空一格)
     const targetLine = codeLines[line - 1]; // 要注入信息的行
+    const nodeName = ast.tag;
     const newLine =
       targetLine.slice(0, columnToInject) +
-      ` ${InjectLineName}="${line}" ${InjectColumnName}="${column}" ${InjectPathName}="${filePath}"` +
+      ` ${InjectLineName}="${line}" ${InjectColumnName}="${column}" ${InjectPathName}="${filePath}" ${InjectNodeName}="${nodeName}"` +
       targetLine.slice(columnToInject);
     codeLines[line - 1] = newLine; // 替换注入后的内容
     source = codeLines.join('\n');
