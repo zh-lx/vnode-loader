@@ -1,4 +1,4 @@
-该 loader 的功能已经集成至 [webpack-vue-debug](https://github.com/zh-lx/webpack-vue-debug)，该 loader 不再维护，请使用 [webpack-vue-debug](https://github.com/zh-lx/webpack-vue-debug)
+<div style="color: red; fontWeight: bold;">该 loader 的功能已经集成至 [webpack-vue-debug](https://github.com/zh-lx/webpack-vue-debug)，该 loader 不再维护，请使用 [webpack-vue-debug](https://github.com/zh-lx/webpack-vue-debug)</div>
 
 # vnode-loader
 
